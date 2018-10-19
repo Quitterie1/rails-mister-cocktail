@@ -1,0 +1,28 @@
+<div class="container">
+  <h1><%= @cocktail.name %></h1>
+  <p><%= @cocktail.description %></p>
+  <h2>Ingredients</h2>
+  <ul>
+    <% @cocktail.ingredients.each do |ingredient| %>
+      <li>
+        <p>
+          <%= ingredient.name.capitalize %>
+          <% ingredient.doses.each do |dose| %>
+            <% if dose.cocktail_id == @cocktail.id %>
+              : <%= dose.description.capitalize %>
+            - <%= link_to "Delete", dose, method: :delete, data: { confirm: "Are you sure?" } %>
+            <% end %>
+          <% end %>
+        </p>
+      </li>
+    <% end %>
+  </ul>
+  <p>
+    <%= link_to "Add a new dose", new_cocktail_dose_path(@cocktail) %>
+  </p>
+  <p>
+    <%= link_to "Go back to the list", cocktails_path%>
+  </p>
+
+
+</div>
